@@ -22,6 +22,7 @@ import {
 import FlashMessage from "react-native-flash-message";
 import AppLoading from "expo-app-loading";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import newsScreen from "./screens/newsScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -163,6 +164,7 @@ export default function App() {
         <Stack.Screen name={"Register"} component={Register} />
         {/* <Stack.Screen name={"Nerby"} component={Nerby} /> */}
         <Stack.Screen name={"HomeTab"} component={TabList} />
+        <Stack.Screen name={'News'} component={newsScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   ) : (

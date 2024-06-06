@@ -7,6 +7,7 @@ import {
   Platform,
   Image,
   FlatList,
+  Pressable,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import {
@@ -20,6 +21,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Carousel, { ParallaxImage } from "react-native-snap-carousel";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
+import dataBerita from "../data/dataBerita";
 
 const ENTRIES1 = [
   {
@@ -107,6 +109,7 @@ const styles = StyleSheet.create({
   },
 });
 
+
 const Home = ({ navigation }) => {
   const [entries, setEntries] = useState([]);
   const carouselRef = useRef(null);
@@ -115,6 +118,11 @@ const Home = ({ navigation }) => {
   const goForward = () => {
     carouselRef.current.snapToNext();
   };
+
+  function pressHandler() {
+    navigation.navigate("News", { dataBerita });
+  }
+  
 
   useEffect(() => {
     const fetchCurrentLocation = async () => {
@@ -138,26 +146,7 @@ const Home = ({ navigation }) => {
     setEntries(ENTRIES1);
   }, []);
 
-  const dataBerita = [
-    {
-      id: 0,
-      judul: "Pentingnya performa ban untuk berkendara",
-      subJudul: "Performa buruk berbahaya",
-      img: "https://i.ibb.co/mS5z6YM/ban.jpg",
-    },
-    {
-      id: 1,
-      judul: "Kriteria ban yang baik untuk kendaraanmu",
-      subJudul: "beberapa kriteria ban yang baik",
-      img: "https://s3.ap-southeast-1.amazonaws.com/moladin.assets/blog/wp-content/uploads/2019/10/20210943/pjimage-2020-07-20T210935.586.jpg",
-    },
-    {
-      id: 2,
-      judul: "Ban bocor berpotensi sobek?",
-      subJudul: "Bahaya ban bocor",
-      img: "https://www.wahanahonda.com/assets/upload/berita/BERITA_1612703202_f313da56f339b5fb48dda003e147fb92.jpg",
-    },
-  ];
+  
 
   const renderItem = ({ item, index }, parallaxProps) => {
     return (
@@ -232,7 +221,7 @@ const Home = ({ navigation }) => {
                 // backgroundColor: "blue",
               }}
             >
-              <View
+              <Pressable
                 style={{
                   backgroundColor: "#774494",
                   width: "80%",
@@ -241,9 +230,10 @@ const Home = ({ navigation }) => {
                   justifyContent: "center",
                   borderRadius: 10,
                 }}
+                onPress={() => navigation.navigate('News', { berita: item })}
               >
                 <Text style={{ color: "white" }}>lebih</Text>
-              </View>
+              </Pressable>
             </View>
           </View>
         </View>
